@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .example-wrapper .component { padding: 1em; border: 1px solid #ccc; border-radius: 4px; background: #fff; }
+</style>
+
+<div class="example-wrapper">
+    <h3>Single prop passed to the Container component</h3>
+    <p>In this implementation, the contract is between the component and entity, potentially a DTO. I believe encapsulation is the word I'm looking for to describe a goal?</p>
+
+    <p>Name property of the entity can be edited as it's a scalar, but any DateTime or entity relationship properties are read-only due to the limitation.</p>
+
+    <twig:Container
+        entity="{{ entity }}"
+        class="component"
+    />
+</div>
+{% endblock %}

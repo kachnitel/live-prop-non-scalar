@@ -1,0 +1,34 @@
+<div{{ attributes }}>
+    <h3>Multiple props passed to the EntityEdit component</h3>
+    <p>In this implementation, the contract needs to be known by this <code>Container</code> component template and any other template that uses the <code>EntityEdit</code> component.</p>
+
+    <twig:EntityEdit
+        name="{{ entity.name }}"
+        dateField="{{ entity.dateField }}"
+        class="component"
+        data-model="entity.name:name entity.dateField:dateField"
+    />
+
+    <p>We want to do some other stuff here related to the entity. Specifically, our parent component updates the date value and we need to reflect the change in the child.</p>
+    <code>
+        {{ entity.name }}
+        <button
+            data-model="entity.name"
+            data-value="New Name"
+            data-action="live#update"
+        >Reset Name</button>
+    </code>
+    <br>
+    <code>
+        {{ entity.dateField|date(constant('App\\Twig\\Components\\EntityEdit::DATETIME_LOCAL_FORMAT')) }}
+        <button
+            data-model="entity.dateField"
+            data-value="{{ entity.dateField|date(constant('App\\Twig\\Components\\EntityEdit::DATETIME_LOCAL_FORMAT')) }}"
+            data-action="live#update"
+        >Reset Date</button>
+    </code>
+
+    <p> Editing date in either component throws an error on change. <code>The model "entity.dateField" was sent for update, but it is not writable. Try adding "writable: ['dateField']" to the $entity property in App\Twig\Components\Container.</code> <br>
+    Doing that, however, causes <code>Error rendering "Container" component: The writable path "dateField" on the "entity" property of the "App\Twig\Components\Container" component must be a scalar or array of scalars.</code>
+    </p>
+</div>
